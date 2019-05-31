@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AspFinal.Models.Entity.Bios>
+@{
+    Layout = null; 
+ }
+<div class="skills">
+    @foreach (var item in Model)
+    {
+        if (item.IsBar == true)
+        {
+
+            <h6>@item.Categories.Name</h6>
+            <div class="panel-group accordion" id="accordion5">
+                <div class="panel panel-default">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <!-- PANEL HEADING -->
+                            <div class="panel-heading">
+                                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion5" href="#@item.Id"> @item.Skills.Name</a></h4>
+                            </div>
+                        </div>
+                        <!-- Skillls Bars -->
+                        <div class="col-sm-8">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="@item.SkillLevel" aria-valuemin="0" aria-valuemax="100" style="width: @item.SkillLevel%;"> <span class="sr-only">@item.SkillLevel% Complete</span> </div>
+                            </div>
+                            <!-- Skillls Text -->
+                            <div id="@item.Id" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <p>@item.SkillDescription</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        }
+    }
+    @foreach (var item in Model)
+    {
+        if (item.IsTag == true)
+        {
+            <a href="#." class="btn p-3" style="background:#346abb; color:white; margin-bottom: 3px;">@item.Categories.Name</a>
+        }
+    }
+</div>
