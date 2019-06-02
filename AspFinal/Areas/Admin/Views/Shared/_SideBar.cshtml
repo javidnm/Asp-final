@@ -38,18 +38,16 @@
                         </ul>
                     </li>
                     <li>
-                        <a title="Landing Page" href="~/Areas/Admin/Template/events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Event</span></a>
+                        <a title="Landing Page" href="@Url.Action("Index","Skills",routeValues:new { area="admin"})" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Skills</span></a>
                     </li>
                     <li>
                         <a class="has-arrow" href="~/Areas/Admin/Template/all-professors.html" aria-expanded="false">
                             <span class="educate-icon educate-professor icon-wrap"></span>
-                            <span class="mini-click-non">Professors</span>
+                            <span class="mini-click-non">Category</span>
                         </a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="All Professors" href="~/Areas/Admin/Template/all-professors.html"><span class="mini-sub-pro">All Professors</span></a></li>
-                            <li><a title="Add Professor" href="~/Areas/Admin/Template/add-professor.html"><span class="mini-sub-pro">Add Professor</span></a></li>
-                            <li><a title="Edit Professor" href="~/Areas/Admin/Template/edit-professor.html"><span class="mini-sub-pro">Edit Professor</span></a></li>
-                            <li><a title="Professor Profile" href="~/Areas/Admin/Template/professor-profile.html"><span class="mini-sub-pro">Professor Profile</span></a></li>
+                            <li><a title="All Professors" href="@Url.Action("Index","Categories",routeValues:new { area="admin"})"><span class="mini-sub-pro">Category</span></a></li>
+                           
                         </ul>
                     </li>
 

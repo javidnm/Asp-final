@@ -9,7 +9,7 @@
     <form method="post" action="@Url.Action("PersonDetailsPost","Dashboard")" enctype="multipart/form-data">
         <div class="form-group">
             @Html.LabelFor(model => model.MediaUrl, htmlAttributes: new { @class = "control-label" })
-            <label class="form-control image-container" style="width:336px;height:336px">
+            <label class="form-control image-container" style="width:100%;height:100%">
                 <img src="@(string.IsNullOrWhiteSpace(Model.MediaUrl)?"":Href("~/Template/Media/"+Model.MediaUrl))" id="news-image" style="width:100%;height:100%;" />
                 <i class="empty-icon"></i>
                 <a href="javascript:removePhoto()"><i class="clear-icon header-right-button"></i></a>

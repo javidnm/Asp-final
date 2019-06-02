@@ -5,9 +5,9 @@ using System.Web;
 
 namespace AspFinal.Models.Entity
 {
-    public class Categories
+    public class Categories : BaseEntity
     {
-        public int Id { get; set; }
+
         public string Name { get; set; }
     }
 }

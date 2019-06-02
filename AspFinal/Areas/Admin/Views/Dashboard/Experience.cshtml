@@ -1,55 +1,57 @@
 ﻿@{
     Layout = null;
 }
-<form action="@Url.Action("ExperiencePost","Dashboard")" method="post">
+
 
     <div class="inside-sec margin-top-30">
         <!-- Professional Experience -->
         <h5 class="tittle">Professional Experience</h5>
         <div class="padding-30 exp-history">
-
+            @Html.Action("RefreshExperience","Dashboard")
             <!-- ADD Professional -->
-            <div class="exp">
-                <div class="row">
-                    <div class="col-sm-7">
-                        <label>
-                            Duration
-                            <input type="text" class="form-control" placeholder="YYYY - YYYY" name="Duration">
-                        </label>
-                        <label>
-                            Job Title
-                            <input type="text" class="form-control" placeholder="" name="Title">
-                        </label>
-                        <label>
-                            Company Name
-                            <input type="text" class="form-control" placeholder="" name="CompanyName">
-                        </label>
-                        <label>
-                            Location
-                            <input type="text" class="form-control" placeholder="" name="Location">
-                        </label>
-                       
-                    </div>
+            <form action="@Url.Action("ExperiencePost","Dashboard")" method="post">
+                <div class="exp">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <label>
+                                Duration
+                                <input type="text" class="form-control" placeholder="YYYY - YYYY" name="Duration">
+                            </label>
+                            <label>
+                                Job Title
+                                <input type="text" class="form-control" placeholder="" name="Title">
+                            </label>
+                            <label>
+                                Company Name
+                                <input type="text" class="form-control" placeholder="" name="CompanyName">
+                            </label>
+                            <label>
+                                Location
+                                <input type="text" class="form-control" placeholder="" name="Location">
+                            </label>
 
-                    <!-- UPLOAD IMG -->
-                    <div class="col-sm-5">
-                        <label class="btn-file">
-                            <i class="fa fa-camera"></i> Click to attach logo
-                            <input type="file" style="display: none;">
-                        </label>
-                    </div>
+                        </div>
 
-                    <!-- ADD DETAILS -->
-                    <div class="col-sm-12">
-                        <label>
-                            Details
-                            <textarea class="form-control" placeholder="" name="Details"></textarea>
-                        </label>
-                        <!-- ADD MORE-->
-                        <button type="submit" class="btn margin-top-20"><i class="fa fa-plus"></i> Add Experience</button>
+                        <!-- UPLOAD IMG -->
+                        <div class="col-sm-5">
+                            <label class="btn-file">
+                                <i class="fa fa-camera"></i> Click to attach logo
+                                <input type="file" style="display: none;">
+                            </label>
+                        </div>
+
+                        <!-- ADD DETAILS -->
+                        <div class="col-sm-12">
+                            <label>
+                                Details
+                                <textarea class="form-control" placeholder="" name="Details"></textarea>
+                            </label>
+                            <!-- ADD MORE-->
+                            <button type="submit" class="btn margin-top-20"><i class="fa fa-plus"></i> Add Experience</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+            </form>
         </div>
     </div>
-</form>

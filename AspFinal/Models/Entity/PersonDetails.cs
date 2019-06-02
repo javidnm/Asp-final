@@ -1,8 +1,9 @@
-﻿namespace AspFinal.Models.Entity
+﻿using System.ComponentModel;
+
+namespace AspFinal.Models.Entity
 {
-    public class PersonDetails
+    public class PersonDetails : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
         public string Location { get; set; }
@@ -13,6 +14,8 @@
         public string Fax { get; set; }
         public string Email { get; set; }
         public string Website { get; set; }
+
+        [DisplayName(" ")]
         public string MediaUrl { get; set; }
     }
 }

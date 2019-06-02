@@ -6,11 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AspFinal.AppCode.Constant;
 using AspFinal.Models;
 using AspFinal.Models.Entity;
 
 namespace AspFinal.Areas.Admin.Controllers
 {
+    [CvAuthorization]
+    [CVFilter]
     public class ContactsController : Controller
     {
         private AspFinalDbContext db = new AspFinalDbContext();
@@ -115,6 +118,15 @@ namespace AspFinal.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult Answer(int? id, Contact Contact)
+        {
+            var c = db.Contact.Find(id);
+            c.Answer = Contact.Answer;
+            db.SaveChanges();
+            Extension.SendMail(Contact.Subject, Contact.Answer, Contact.Email);
+            return RedirectToAction("Index");
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -124,5 +136,6 @@ namespace AspFinal.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+       
     }
 }

@@ -21,5 +21,7 @@ namespace AspFinal.Models
         public DbSet<Skills> Skills { get; set; }
         public DbSet<ProfessionalExperience> ProfessionalExperience { get; set; }
         public DbSet<Contact> Contact { get; set; }
+        public DbSet<Admin> Admin { get; set; }
+        public DbSet<ErrorHistory> ErrorHistories { get; set; }
     }
 }

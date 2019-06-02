@@ -1,0 +1,16 @@
+﻿@model IEnumerable<AspFinal.Models.Entity.ProfessionalExperience>
+@{ 
+    Layout = null;
+    }
+
+@foreach (var item in Model)
+{
+    <form method="post" action="@Url.Action("DeleteExperience","Dashboard")">
+        <div class="exp">
+            <div class="media-left"> <span class="sun">@item.Duration</span> </div>
+           
+            <input value="@item.Id" type="hidden" name="DeleteExperience" />
+            <button href="#" class="btn" type="submit" ><i class="fa fa-trash"></i> Delete</button>
+        </div>
+    </form>
+}

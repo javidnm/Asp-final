@@ -1,0 +1,24 @@
+﻿
+@model IEnumerable<AspFinal.Models.Entity.Categories>
+
+@{
+    Layout = null;
+}
+
+<div class="col-sm-6">
+    <input type="hidden" id="Categoryid" name="CategoriesId" />
+    <select id="Categories" class="selectpicker">
+        <option disabled selected value=""> Select Category </option>
+        @foreach (var item in Model)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+    $("#Categories").change(function () {
+        var selected = $(this).children("option:selected").val();
+        $("#Categoryid").val(selected)
+    })
+</script>

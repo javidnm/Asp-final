@@ -5,9 +5,8 @@ using System.Web;
 
 namespace AspFinal.Models.Entity
 {
-    public class ProfessionalExperience
+    public class ProfessionalExperience : BaseEntity
     {
-        public int Id { get; set; }
         public string Duration { get; set; }
         public string Title { get; set; }
         public string CompanyName { get; set; }

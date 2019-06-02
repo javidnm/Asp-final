@@ -52,9 +52,16 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.4\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -123,34 +130,45 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppCode\Constant\SessionKey.cs" />
     <Compile Include="AppCode\Extensions\EmailExtension.cs" />
     <Compile Include="AppCode\Extensions\ImageExtension.cs" />
+    <Compile Include="AppCode\Filters\CVAuthorizationAttribute.cs" />
+    <Compile Include="AppCode\Filters\CVFilterAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ContactsController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SkillsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905301317200_Initial.cs" />
-    <Compile Include="Migrations\201905301317200_Initial.Designer.cs">
-      <DependentUpon>201905301317200_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201906021433233_Initial.cs" />
+    <Compile Include="Migrations\201906021433233_Initial.Designer.cs">
+      <DependentUpon>201906021433233_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AspFinalDbContext.cs" />
     <Compile Include="Models\Entity\AcademicBackgrounds.cs" />
+    <Compile Include="Models\Entity\Admin.cs" />
+    <Compile Include="Models\Entity\BaseEntity.cs" />
     <Compile Include="Models\Entity\Bios.cs" />
     <Compile Include="Models\Entity\Categories.cs" />
     <Compile Include="Models\Entity\Contact.cs" />
+    <Compile Include="Models\Entity\ErrorHistory.cs" />
     <Compile Include="Models\Entity\PersonDetails.cs" />
     <Compile Include="Models\Entity\ProfessionalExperience.cs" />
     <Compile Include="Models\Entity\Skills.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Login\css\style.css" />
+    <Content Include="Areas\Admin\Login\index.html" />
+    <Content Include="Areas\Admin\Login\js\main.js" />
     <Content Include="Areas\Admin\Template\404.html" />
     <Content Include="Areas\Admin\Template\500.html" />
     <Content Include="Areas\Admin\Template\accordion.html" />
@@ -429,6 +447,7 @@
     <Content Include="Template\blog-single.html" />
     <Content Include="Template\blog.html" />
     <Content Include="Template\contact.html" />
+    <Content Include="Template\css404\style.css" />
     <Content Include="Template\css\bootstrap\bootstrap.min.css" />
     <Content Include="Template\css\font-awesome.min.css" />
     <Content Include="Template\css\fonts\glyphicons-halflings-regular-2.html" />
@@ -502,7 +521,6 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AppCode\Filter\" />
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Template\Media\" />
@@ -541,6 +559,26 @@
     <Content Include="Areas\Admin\Views\Contacts\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Contacts\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Contacts\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Login.cshtml" />
+    <Content Include="NLog.config" />
+    <Content Include="Areas\Admin\Views\Skills\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Skills\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Skills\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Skills\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Skills\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\BioRefresh.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Skill.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Category.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\RefreshAcademicBackground.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\RefreshExperience.cshtml" />
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <Content Include="Template\fonts\fontawesome-webfont93e3.eot" />
     <Content Include="Template\fonts\fontawesome-webfont93e3.ttf" />
@@ -562,10 +600,11 @@
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\SocialProfile.cshtml" />
+    <Content Include="Views\Home\ErrorHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905301317200_Initial.resx">
-      <DependentUpon>201905301317200_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906021433233_Initial.resx">
+      <DependentUpon>201906021433233_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

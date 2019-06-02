@@ -1,0 +1,28 @@
+﻿@model IEnumerable<AspFinal.Models.Entity.AcademicBackgrounds>
+@{
+    Layout = null;
+    }
+
+@foreach (var item in Model)
+{
+    <div class="exp">
+        <form method="post" action="@Url.Action("DeleteAcademic","Dashboard")">
+            <div class="media-left"> <span class="sun">@item.Qualification</span> </div>
+            <div class="media-body">
+                <!-- COmpany Logo -->
+                <div class="company-logo" style="width:100px; height:100px">
+                    <input name="fileName" id="fileName"
+                           value="@(string.IsNullOrWhiteSpace(item.MediaUrl) ? "" : Href("~/Template/Media/" + item.MediaUrl))"
+                           type="hidden" />
+                    <img src="@(string.IsNullOrWhiteSpace(item.MediaUrl)?"":Href("~/Template/Media/"+item.MediaUrl))" id="news-image" />
+                </div>
+                <h6>@item.UniversityName</h6>
+                <p>@item.Degree</p>
+                <p>@item.YearOfObtention</p>
+                <p class="margin-top-10">@item.Details
+            </div>
+            <input value="@item.Id" type="hidden" name="DeleteAcademic" />
+            <button href="#" class="btn" type="submit" ><i class="fa fa-trash"></i> Delete</button>
+        </form>
+    </div>
+}

@@ -2,6 +2,8 @@
 @{
     Layout = null;
 }
+
+@Html.Action("BioRefresh", "Dashboard")
 <form action="@Url.Action("BioSkillsPost","Dashboard")" method="post">
 
     <div class="inside-sec">
@@ -18,25 +20,12 @@
                 <div class="row">
 
                     <!-- Categories -->
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.CategoriesId, htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownList("CategoriesId", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.CategoriesId, "", new { @class = "text-danger" })
-                        </div>
-
-                        <span class="add-custm">or <a href="#."> Add A Custom Skills</a></span>
-                    </div>
+                    @Html.Action("Category", "Dashboard")
+                    
 
                     <!--  Skills -->
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.SkillsId, htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownList("SkillsId", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.SkillsId, "", new { @class = "text-danger" })
-                        </div>
-                        <span class="add-custm">or <a href="#."> Add A Custom Skills</a></span>
-                    </div>
+                    @Html.Action("Skill", "Dashboard")
+
                 </div>
 
                 <!-- Disply Type -->

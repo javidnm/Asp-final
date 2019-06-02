@@ -5,8 +5,11 @@ using System.Web.Mvc;
 
 namespace AspFinal.Controllers
 {
+
+    [CVFilter]
     public class HomeController : Controller
     {
+
         AspFinalDbContext db = new AspFinalDbContext();
         public ActionResult Index()
         {
@@ -41,7 +44,7 @@ namespace AspFinal.Controllers
         }
         public ActionResult BioSkills()
         {
-            var bios = db.Bios.OrderByDescending(b => b.IsBar == true).ToList();
+            var bios = db.Bios.OrderByDescending(b => b.IsBar == true).Where(w => w.DeletedDate == null).ToList();
             return View(bios);
         }
         public ActionResult AcademicBackground()
@@ -64,6 +67,10 @@ namespace AspFinal.Controllers
         {
             return View();
         }
-       
+        public ActionResult ErrorHistory()
+        {
+            return View();
+        }
+
     }
 }
